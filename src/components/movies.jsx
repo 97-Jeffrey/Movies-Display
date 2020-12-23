@@ -7,11 +7,6 @@ class Movies extends Component {
     movies: getMovies()
   };
 
-  showMessage=()=>{
-    return this.state.movies.length>0?
-    `Showing ${this.state.movies.length} movies in the database`:
-    'There are no movies in database'
-  }
 
   handleDelete=movie=>{
     const movies = this.state.movies.filter(m=>m._id!==movie._id)
