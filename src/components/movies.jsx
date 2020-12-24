@@ -7,7 +7,8 @@ import Like from './like';
 class Movies extends Component {
   state = { 
     movies: getMovies(),
-    pageSize:4
+    pageSize:4,
+    currentPage:1
   };
 
 
@@ -25,13 +26,14 @@ class Movies extends Component {
   } 
 
   handlePageChange=page=>{
-
-    console.lof(page)
+    this.setState({currentPage:page});
   }
   
 
   render() { 
-    const{length:count} = this.state.movies;
+    const{ length:count } = this.state.movies;
+    const{ pageSize, currentPage } = this.state;
+
     if(!count) return <p>There are no movies in database</p>
     return ( 
       <>
@@ -70,7 +72,8 @@ class Movies extends Component {
     </table>
     <Pagination 
       itemsCount={count} 
-      pageSize={this.state.pageSize} 
+      pageSize={pageSize} 
+      currentPage={currentPage}
       onPageChange={this.handlePageChange}
     />
     </>
