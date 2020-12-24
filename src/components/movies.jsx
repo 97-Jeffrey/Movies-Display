@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import {getMovies} from '../services/fakeMovieService';
+import { getGenres } from '../services/fakeGenreService';
 import Pagination from './pagination';
 import paginate from '../utils/paginate';
 import Like from './like';
+import ListGroup from './listGroup';
 
 
 class Movies extends Component {
   state = { 
-    movies: getMovies(),
+    movies: [],
+    genres: [],
     pageSize:4,
     currentPage:1
   };
+
+  componentDidMount(){
+    this.setState({movies: getMovies(), genres: getGenres() })
+
+  }
 
 
   handleDelete=movie=>{
@@ -29,6 +37,10 @@ class Movies extends Component {
   handlePageChange=page=>{
     this.setState({currentPage:page});
   }
+
+  handleGenreSelect = genre =>{
+    console.log(genre)
+  }
   
 
   render() { 
@@ -41,8 +53,17 @@ class Movies extends Component {
 
 
     return ( 
-      <>
-    <p className='mt-3'>Showing {count} movies in the database</p>
+      <div className='row'>
+        <div className="col-3">
+          <ListGroup 
+            items={this.state.genres} 
+            onItemSelect={this.handleGenreSelect}
+            textProperty="name"
+            valueProperty="_id"
+          />
+        </div>
+        <div className="col">
+        <p className='mt-3'>Showing {count} movies in the database</p>
     <table className="table">
       <thead>
         <tr>
@@ -81,7 +102,9 @@ class Movies extends Component {
       currentPage={currentPage}
       onPageChange={this.handlePageChange}
     />
-    </>
+        </div>
+
+    </div>
      );
   }
 }
