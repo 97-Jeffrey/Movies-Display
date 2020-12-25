@@ -3,8 +3,8 @@ import {getMovies} from '../services/fakeMovieService';
 import { getGenres } from '../services/fakeGenreService';
 import Pagination from './pagination';
 import paginate from '../utils/paginate';
-import Like from './like';
 import ListGroup from './listGroup';
+import MoviesTable from './moviesTables';
 
 
 class Movies extends Component {
@@ -64,48 +64,20 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
-        <p className='mt-3'>Showing {filtered.length} movies in the database</p>
-    <table className="table">
-      <thead>
-        <tr>
-        <th scope='col'>Title</th>
-        <th scope='col'>Genre</th>
-        <th scope='col'>Stock</th>
-        <th scope='col'>Rate</th>
-        <th></th>
-        <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {movies.map(movie=> 
-        <tr key={movie._id}>
-          <td>{movie.title}</td>
-          <td>{movie.genre.name}</td>
-          <td>{movie.numberInStock}</td>
-          <td>{movie.dailyRentalRate}</td>
-          <td>
-            <Like liked={movie.liked} onClick={()=>this.handleLike(movie)}/>
-          </td>
-          <td>
-            <button
-              onClick={()=>this.handleDelete(movie)}
-              className="btn btn-danger btn-sm"
-            >
-            delete
-            </button>
-          </td>
-        </tr>)}
-      </tbody>
-    </table>
-    <Pagination 
-      itemsCount={filtered.length} 
-      pageSize={pageSize} 
-      currentPage={currentPage}
-      onPageChange={this.handlePageChange}
-    />
+          <p className='mt-3'>Showing {filtered.length} movies in the database</p>
+          <MoviesTable 
+            movies={movies} 
+            onLike={this.handleLike}
+            onDelete={this.handleDelete}
+          />
+          <Pagination 
+            itemsCount={filtered.length} 
+            pageSize={pageSize} 
+            currentPage={currentPage}
+            onPageChange={this.handlePageChange}
+          />
         </div>
-
-    </div>
+      </div>
      );
   }
 }
