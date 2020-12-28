@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Movies from './components/movies'
+import Movies from './components/movies';
+import NavBar from './components/navBar';
 
 
 class App extends Component {
@@ -7,6 +8,7 @@ class App extends Component {
   render() { 
     return (
       <main className='container'>
+       <NavBar/>
        <Movies/>
       </main>
      );
