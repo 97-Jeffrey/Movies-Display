@@ -6,6 +6,8 @@ import Customers from './components/customers';
 import Rentals from './components/rentals';
 import NotFound from './components/notFound';
 import MovieForm from './components/movieForm';
+import LoginFrom from './components/loginForm';
+
 
 
 
@@ -17,6 +19,7 @@ class App extends Component {
         <NavBar/>
         <main className='container'>
           <Switch>
+            <Route path='/login' component={LoginFrom}/>
             <Route path="/movies/:id" component={MovieForm}></Route>
             <Route path="/movies" component={Movies}></Route>
             <Route path="/customers" component={Customers}></Route>
