@@ -4,13 +4,30 @@ import Input from './input';
 class LoginFrom extends Component {
 
   state={
-    account:{ username:'', password:'' }
+    account:{ username:'', password:'' },
+    errors:{
+
+    }
   };
+
+  validate = () =>{
+    const errors={};
+    const { account } = this.state;
+    if(account.username.trim() === '') errors.username='Username is required.';
+    if(account.password.trim() === '') errors.password='Password is required.';
+
+    return Object.keys(errors).length===0? null:errors;
+  }
 
   handleSubmit= e =>{
     e.preventDefault();
 
-    console.log('submitted ')
+    const errors = this.validate();
+    console.log(errors);
+    this.setState({ errors });
+    if(errors) return;
+    
+    console.log('submitted')
   } 
 
   handleChange= ({ currentTarget:input}) =>{
