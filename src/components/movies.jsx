@@ -93,9 +93,9 @@ class Movies extends Component {
         <div className="col">
           <Link
             to="/movies/new"
-            className="btn btn-primary mb-4"
+            className="btn btn-primary mb-3"
           >
-          New Movie
+          Add a Movie
           </Link>
           
           <p className='mt-3'>Showing {totalCount} movies in the database</p>
