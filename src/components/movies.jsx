@@ -76,8 +76,6 @@ class Movies extends Component {
       filtered = allMovies.filter(m=>m.genre._id=== selectedGenre._id)
     }
 
-    // const filtered = selectedGenre && selectedGenre._id? allMovies.filter(m=>m.genre._id=== selectedGenre._id) : allMovies;
-
     const sorted =_.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
     const movies = paginate(sorted, currentPage, pageSize);
